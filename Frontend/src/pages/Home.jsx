@@ -51,7 +51,7 @@ export default function Home() {
 
         {/* Floating plane decoration */}
         <div className="absolute top-16 right-16 opacity-10 hidden lg:block">
-          <Plane className="w-64 h-64 text-teal-800 rotate-12" />
+          <Plane className="w-64 h-64 text-orange-800 rotate-12" />
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-36">
@@ -59,7 +59,7 @@ export default function Home() {
             
             <h1 className="text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
               Plan Your Dream
-              <span className="block text-teal-600">Trip with AI</span>
+              <span className="block text-orange-600">Trip with AI</span>
             </h1>
             <p className="text-lg text-teal-800 leading-relaxed mb-8 max-w-xl">
               Enter your destination, budget, and interests — and let TripCraft AI build you a complete, personalized itinerary in seconds.

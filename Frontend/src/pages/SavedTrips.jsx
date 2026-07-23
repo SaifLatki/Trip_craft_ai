@@ -24,7 +24,7 @@ export default function SavedTrips() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <div className="bg-hero text-white py-16">
+      <div className="bg-hero text-orange-400 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-3 mb-3">
             <div className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center">
@@ -36,7 +36,7 @@ export default function SavedTrips() {
             </h1>
           </div>
 
-          <p className="text-teal-100 ml-14">
+          <p className="text-teal-300 ml-14">
             {trips.length === 0
               ? "Your saved itineraries will appear here."
               : `${trips.length} itiner${
@@ -89,7 +89,7 @@ export default function SavedTrips() {
               easy access.
             </p>
 
-            <Link to="/generate" className="btn-primary">
+            <Link to="/generate" className="btn-primary inline-flex items-center gap-2">
               <Plane className="w-4 h-4" />
               Plan Your First Trip
             </Link>

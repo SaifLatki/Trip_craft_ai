@@ -37,7 +37,7 @@ const About = () => {
   return (
     <div className="min-h-screen">
       {/* Hero */}
-      <section className="bg-hero text-white py-20 lg:py-28">
+      <section className="bg-hero text-teal py-20 lg:py-28">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
           <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
             <Plane className="w-8 h-8 text-orange-400" />
@@ -47,7 +47,7 @@ const About = () => {
             About <span className="text-orange-400">TripCraft AI</span>
           </h1>
 
-          <p className="text-lg text-teal-100 leading-relaxed max-w-2xl mx-auto">
+          <p className="text-lg text-teal-300 leading-relaxed max-w-2xl mx-auto">
             TripCraft AI is a modern travel itinerary planner that uses
             artificial intelligence to help you discover, plan, and experience
             your next adventure — your way.

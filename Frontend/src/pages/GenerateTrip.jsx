@@ -264,18 +264,14 @@ const GenerateTrip = () => {
   return (
     <div className="min-h-screen bg-warm-50 dark:bg-warm-950">
       {/* Header */}
-      <div className="bg-hero text-white py-14">
+      <div className="bg-hero text-orange-400 py-14">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-2 bg-white/10 rounded-full px-4 py-1.5 text-sm text-teal-100 mb-4">
-            <Sparkles className="w-4 h-4 text-orange-400" />
-            AI-Powered Planning
-          </div>
-
+         
           <h1 className="text-4xl font-extrabold mb-3">
             Plan Your Perfect Trip
           </h1>
 
-          <p className="text-teal-100 max-w-lg mx-auto">
+          <p className="text-teal-200 max-w-lg mx-auto">
             Fill in your preferences and let AI craft a personalized
             day-by-day itinerary for you.
           </p>
@@ -304,7 +300,9 @@ const GenerateTrip = () => {
       <label className="label">Destination</label>
 
       <div className="relative">
-        <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-warm-400" />
+        <span className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+          <MapPin className="w-5 h-5 text-gray-500" />
+        </span>
 
         <input
           type="text"
@@ -316,7 +314,7 @@ const GenerateTrip = () => {
               destination: e.target.value,
             }))
           }
-          className={`input-field pl-10 ${
+          className={`input-field pl-12 ${
             errors.destination
               ? "border-red-400 focus:ring-red-400"
               : ""
@@ -336,7 +334,7 @@ const GenerateTrip = () => {
       <label className="label">Days</label>
 
       <div className="relative">
-        <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-warm-400" />
+        <Calendar className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-warm-400" />
 
         <input
           type="number"
@@ -367,7 +365,7 @@ const GenerateTrip = () => {
       <label className="label">Travelers</label>
 
       <div className="relative">
-        <Users className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-warm-400" />
+        <Users className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-warm-400" />
 
         <input
           type="number"
@@ -394,84 +392,85 @@ const GenerateTrip = () => {
     </div>
 
     {/* Budget */}
-    <div className="sm:col-span-2 lg:col-span-4">
+    <div className="sm:col-span-2 lg:col-span-2">
       <label className="label">
         Total Budget (PKR)
       </label>
 
       <div className="relative">
-        <Wallet className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-warm-400" />
+    {/* Rs Label */}
+    <span className="absolute left-80 top-1/2 -translate-y-1/2 text-gray-500 font-medium">
+      Rs
+    </span>
 
-        <input
-          type="number"
-          min={1000}
-          step={1000}
-          value={form.budget}
-          onChange={(e) =>
-            setForm((prev) => ({
-              ...prev,
-              budget: parseInt(e.target.value) || 0,
-            }))
-          }
-          className={`input-field pl-10 ${
-            errors.budget ? "border-red-400" : ""
-          }`}
-        />
+    {/* Input */}
+    <input
+      type="number"
+      min={1000}
+      step={1000}
+      value={form.budget}
+      onChange={(e) =>
+        setForm((prev) => ({
+          ...prev,
+          budget: parseInt(e.target.value) || 0,
+        }))
+      }
+      className="input-field pl-10"
+    />
 
-        <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm text-warm-400 font-medium">
-          ₨
-        </span>
+    {/* Wallet Icon */}
+    <Wallet className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+  </div>
+
+        {errors.budget && (
+          <p className="text-xs text-red-500 mt-1">
+            {errors.budget}
+          </p>
+        )}
+      </div>
+    </div>
+
+    {/* Interests */}
+
+    <div>
+      <label className="label mb-2">
+        Interests
+      </label>
+
+      <div className="flex flex-wrap gap-2">
+        {INTERESTS.map((interest) => {
+          const active =
+            form.interests.includes(interest);
+
+          return (
+            <button
+              key={interest}
+              type="button"
+              onClick={() =>
+                handleInterestToggle(interest)
+              }
+              className={`px-4 py-2 rounded-xl text-sm font-medium border-2 transition-all duration-200 ${
+                active
+                  ? "bg-teal-700 border-teal-700 text-black shadow-sm"
+                  : "bg-teal dark:bg-warm-800 border-warm-200 dark:border-warm-600 text-warm-600 dark:text-warm-300 hover:border-teal-400 dark:hover:border-teal-600"
+              }`}
+            >
+              {active && (
+                <CheckCircle className="w-3.5 h-3.5 inline mr-1.5 -mt-0.5" />
+              )}
+
+              {interest}
+            </button>
+          );
+        })}
       </div>
 
-      {errors.budget && (
-        <p className="text-xs text-red-500 mt-1">
-          {errors.budget}
+      {errors.interests && (
+        <p className="text-xs text-red-500 mt-2">
+          {errors.interests}
         </p>
       )}
     </div>
-  </div>
-
-  {/* Interests */}
-
-  <div>
-    <label className="label mb-2">
-      Interests
-    </label>
-
-    <div className="flex flex-wrap gap-2">
-      {INTERESTS.map((interest) => {
-        const active =
-          form.interests.includes(interest);
-
-        return (
-          <button
-            key={interest}
-            type="button"
-            onClick={() =>
-              handleInterestToggle(interest)
-            }
-            className={`px-4 py-2 rounded-xl text-sm font-medium border-2 transition-all duration-200 ${
-              active
-                ? "bg-teal-700 border-teal-700 text-white shadow-sm"
-                : "bg-white dark:bg-warm-800 border-warm-200 dark:border-warm-600 text-warm-600 dark:text-warm-300 hover:border-teal-400 dark:hover:border-teal-600"
-            }`}
-          >
-            {active && (
-              <CheckCircle className="w-3.5 h-3.5 inline mr-1.5 -mt-0.5" />
-            )}
-
-            {interest}
-          </button>
-        );
-      })}
-    </div>
-
-    {errors.interests && (
-      <p className="text-xs text-red-500 mt-2">
-        {errors.interests}
-      </p>
-    )}
-  </div>
 
   {/* Info */}
 

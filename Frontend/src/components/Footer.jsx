@@ -79,11 +79,7 @@ const Footer = () => {
             © {new Date().getFullYear()} TripCraft AI. All rights reserved.
           </span>
 
-          <span className="flex items-center gap-1">
-            Made with{" "}
-            <Heart className="w-3 h-3 text-red-400 fill-red-400" /> for
-            travelers everywhere
-          </span>
+         
         </div>
       </div>
     </footer>
