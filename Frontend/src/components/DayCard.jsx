@@ -91,7 +91,11 @@ export default function DayCard({
         <div className="p-6 space-y-4">
           {slots.map(
             ({ key, label, Icon, color, bg, border }) => {
-              const slot = day[key];
+              const slot = day?.[key] ?? {};
+              const activity = slot.activity ?? day?.activities?.[key] ?? "";
+              const description = slot.description ?? "";
+              const location = slot.location ?? "";
+              const cost = Number(slot.cost ?? 0) || 0;
 
               return (
                 <div
@@ -109,23 +113,23 @@ export default function DayCard({
                   </div>
 
                   <h4 className="font-semibold text-warm-900 dark:text-warm-100 mb-1">
-                    {slot.activity}
+                    {activity || "Planned activity"}
                   </h4>
 
                   <p className="text-sm text-warm-600 dark:text-warm-400 leading-relaxed">
-                    {slot.description}
+                    {description || "A well-paced plan will be added here."}
                   </p>
 
                   <div className="flex items-center gap-1 mt-2">
                     <MapPin className="w-3.5 h-3.5 text-warm-400" />
 
                     <span className="text-xs text-warm-400">
-                      {slot.location}
+                      {location || "Location details coming soon"}
                     </span>
 
-                    {slot.cost > 0 && (
+                    {cost > 0 && (
                       <span className="ml-auto text-xs font-medium text-teal-600 dark:text-teal-400">
-                        ₨{slot.cost.toLocaleString()}
+                        ₨{cost.toLocaleString()}
                       </span>
                     )}
                   </div>

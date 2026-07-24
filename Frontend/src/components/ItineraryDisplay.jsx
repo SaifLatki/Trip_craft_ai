@@ -3,6 +3,12 @@ import { Sunrise, Sun, Sunset, UtensilsCrossed, RefreshCw } from "lucide-react";
 export default function ItineraryDisplay({ plan, onRegenerateDay, regeneratingDay }) {
   if (!plan?.length) return null;
 
+  const getActivity = (day, slotKey) => {
+    if (day?.[slotKey]?.activity) return day[slotKey].activity;
+    if (typeof day?.activities?.[slotKey] === "string") return day.activities[slotKey];
+    return "";
+  };
+
   return (
     <div className="space-y-5">
       {plan.map((day) => (
@@ -31,19 +37,19 @@ export default function ItineraryDisplay({ plan, onRegenerateDay, regeneratingDa
               <div className="flex items-center gap-2 font-medium mb-1 text-sand-500">
                 <Sunrise size={16} /> Morning
               </div>
-              <p>{day.activities?.morning}</p>
+              <p>{getActivity(day, "morning")}</p>
             </div>
             <div className="bg-sand-50 dark:bg-teal-950 rounded-xl p-3">
               <div className="flex items-center gap-2 font-medium mb-1 text-teal-600">
                 <Sun size={16} /> Afternoon
               </div>
-              <p>{day.activities?.afternoon}</p>
+              <p>{getActivity(day, "afternoon")}</p>
             </div>
             <div className="bg-sand-50 dark:bg-teal-950 rounded-xl p-3">
               <div className="flex items-center gap-2 font-medium mb-1 text-teal-800 dark:text-sand-200">
                 <Sunset size={16} /> Evening
               </div>
-              <p>{day.activities?.evening}</p>
+              <p>{getActivity(day, "evening")}</p>
             </div>
           </div>
 

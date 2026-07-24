@@ -15,7 +15,7 @@ import {
   Info,
 } from "lucide-react";
 
-import { generateTrip } from "@/api/ai";
+import { generateTrip, normalizeTrip } from "@/api/ai";
 import { useTrips } from "@/context/TripsContext";
 
 import DayCard from "@/components/DayCard";
@@ -78,7 +78,10 @@ const GenerateTrip = () => {
   });
 
   const [isLoading, setIsLoading] = useState(false);
-  const [result, setResult] = useState(null);
+  const [result, setResult] = useState(() => {
+    const state = location.state || {};
+    return state.tripData ? normalizeTrip(state.tripData) : null;
+  });
   const [saved, setSaved] = useState(false);
   const [regeneratingDay, setRegeneratingDay] = useState(null);
   const [errors, setErrors] = useState({});
@@ -87,7 +90,7 @@ const GenerateTrip = () => {
     const state = location.state || {};
 
     if (state.tripData) {
-      setResult(state.tripData);
+      setResult(normalizeTrip(state.tripData));
     }
   }, [location.state]);
 

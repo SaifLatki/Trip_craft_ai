@@ -3,6 +3,7 @@ import { X, MapPin, Calendar, Users, Wallet } from "lucide-react";
 import DayCard from "./DayCard";
 import BudgetBreakdownCard from "./BudgetBreakdownCard";
 import WeatherWidget from "./WeatherWidget";
+import { normalizeTrip } from "../api/ai";
 
 function formatPKR(v) {
   return v >= 1000000
@@ -11,6 +12,8 @@ function formatPKR(v) {
 }
 
 export default function TripDetailModal({ trip, onClose }) {
+  const normalizedTrip = normalizeTrip(trip);
+
   useEffect(() => {
     document.body.style.overflow = "hidden";
 
@@ -89,7 +92,7 @@ export default function TripDetailModal({ trip, onClose }) {
             </div>
 
             <div className="lg:col-span-2 space-y-4">
-              {trip.itinerary.map((day) => (
+              {normalizedTrip.itinerary.map((day) => (
                 <DayCard key={day.day} day={day} />
               ))}
             </div>
